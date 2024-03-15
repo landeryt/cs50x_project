@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Settings
+{% endblock %}
+
+{% block main %}
+    <h1 class="mb-4 mont">Settings</h1>
+    <div class="card mb-4">
+        <h5 class="card-header">Info</h5>
+        <div class="card-body">
+            <h5 class="card-title">Customize your experience</h5>
+            <p class="card-text">With bio, displaynames and more!</p>
+            <a href="/info" class="btn btn-primary">Personalize</a>
+        </div>
+    </div>
+    <div class="card mb-4">
+        <h5 class="card-header">Security</h5>
+        <div class="card-body">
+            <h5 class="card-title">Change login information</h5>
+            <p class="card-text">Password and magic word</p>
+            <a href="/security" class="btn btn-primary">Security</a>
+        </div>
+    </div>
+{% endblock %}

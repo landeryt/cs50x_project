@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Info
+{% endblock %}
+
+{% block main %}
+    <h1 class="mb-4 mont">Personalize</h1>
+    <form action="/info" method="post">
+        <p class="red mb-5">Warning: Changing timezone will reset your streak</p>
+        <div class="form-floating mb-3">
+            <select class="form-select" id="floatingSelect" aria-label="Timezone" name="timezone">
+                <option selected disabled>Select</option>
+                {% for time in tz %}
+                    <option value="{{ time }}">UTC{{ time }}</option>
+                {% endfor %}
+            </select>
+            <label for="floatingSelect">Timezone</label>
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Displayname</span>
+            <input type="text" class="form-control" aria-label="Displayname" value="{{ displayname }}" aria-describedby="inputGroup-sizing-default" name="displayname" id="displayname">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text">Bio</span>
+            <textarea class="form-control" aria-label="Bio" name="bio" id="bio" rows="4">{{ bio }}</textarea>
+        </div>
+        <button class="btn btn-outline-info" id="submit" type="submit">Submit</button>
+    </form>
+    <script>
+        document.querySelector('#submit').addEventListener('click', function() {
+            let displayname = document.querySelector('#displayname');
+            if (displayname.value === "") {
+                    alert("Must provide displayname");
+                    event.preventDefault();
+                }
+            });
+    </script>
+
+{% endblock %}

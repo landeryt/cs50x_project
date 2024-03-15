@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Homepage
+{% endblock %}
+
+{% block main %}
+    <h4 class="mb-4 mont">Welcome back, {{ displayname }}!</h2>
+    <p class="red mb-5">Your current streak is: {{ streak }}</p>
+    <h2>You have already written a note for today. Come back in {{ hours | int }}h {{ minutes | int }}m {{ seconds | int }}s</h2>
+{% endblock %}

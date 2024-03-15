@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Forget Password
+{% endblock %}
+
+{% block main %}
+    <form action="/forget" method="post">
+        <h2 class="mb-4">Forget Password</h2>
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="username" name="username" placeholder="Username" type="text">
+        </div>
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" id="magicword" name="magicword" placeholder="Magic Word" type="text">
+        </div>
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" id="password" name="password" placeholder="New Password" type="password">
+        </div>
+        <button class="btn btn-outline-info" id="submit" type="submit">Change password</button>
+    </form>
+    <script>
+        document.querySelector('#submit').addEventListener('click', function() {
+            let username = document.querySelector('#username');
+            let magicword = document.querySelector('#magicword');
+            let password = document.querySelector('#password');
+            if (username.value === "") {
+                alert("Must provide username");
+                event.preventDefault();
+            } else if (password.value === "") {
+                alert("Must provide new password");
+                event.preventDefault();
+            } else if (magicword.value === "") {
+                alert("Must provide magic word");
+                event.preventDefault();
+            }
+        })
+    </script>
+
+{% endblock %}

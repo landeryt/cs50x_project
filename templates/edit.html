@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Edit
+{% endblock %}
+
+{% block main %}
+    <form action="/edit" method="post">
+        <legend class="mb-4 mont">Enter date</legend>
+        <input type="date" name="dateInput" id="dateInput" class="form-control mb-3">
+        <button class="btn btn-outline-info" type="submit" id="submit">Submit</button>
+    </form>
+    <script>
+        // Not very user friendly, unfortunately.
+        // Function to ensure date is not empty
+        document.querySelector('#submit').addEventListener('click', function() {
+            let dateInput = document.querySelector('#dateInput');
+            if (dateInput.value === "") {
+                alert("Must provide valid date.");
+                event.preventDefault();
+            }
+        })
+        // Get today's date
+        var today = new Date();
+
+        // Format date to "YYYY-MM-DD"
+        var formattedDate = today.toISOString().substr(0,10); // Only take from char 0th to 10th of the ISO string
+
+        // Set max attribute of date input field
+        document.getElementById("dateInput").max = formattedDate
+    </script>
+{% endblock %}

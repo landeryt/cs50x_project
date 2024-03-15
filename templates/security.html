@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Security
+{% endblock %}
+
+{% block main %}
+    <h1 class="mb-4 mont">Security</h1>
+    <form action="/security" method="post">
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" id="oldpassword" name="oldpassword" placeholder="Current Password" type="password">
+        </div>
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" id="newpassword" name="newpassword" placeholder="New password" type="password">
+        </div>
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" id="magicword" name="magicword" value="{{ magicword }}" type="text" placeholder="New Magic Word">
+        </div>
+        <button class="btn btn-outline-info" id="submit" type="submit">Change</button>
+    </form>
+    <script>
+        document.querySelector('#submit').addEventListener('click', function() {
+            let oldpassword = document.querySelector('#oldpassword');
+            let newpassword = document.querySelector('#newpassword');
+            let magicword = document.querySelector('#magicword');
+            let length = newpassword.value.length;
+            if (oldpassword.value === "") {
+                alert("Must provide old password");
+                event.preventDefault();
+            } else if (newpassword.value === "") {
+                alert("Must provide new password");
+                event.preventDefault();
+            } else if (magicword.value === "") {
+                alert("Must provide new magic word");
+                event.preventDefault();
+            } else if (length < 6) {
+                alert("New password must be longer than 6 characters");
+                event.preventDefault();
+            }
+        })
+    </script>
+{% endblock %}

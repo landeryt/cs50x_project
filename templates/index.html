@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Homepage
+{% endblock %}
+
+{% block main %}
+    <h4 class="mb-4 mont">Welcome back, {{ displayname }}!</h2>
+    <p class="red mb-5">Your current streak is: {{ streak }}</p>
+    <form action="/" method="post">
+        <h1 class="mb-4 mont">How was your day?</h2>
+        <p class="mb-3">{{ date.strftime('%d-%m-%Y') }}</p>
+        <select class="form-select form-select-lg mb-3" name="rating" id="rating" aria-label="Rating">
+            <option selected disabled>Rate your day</option>
+            {% for rating in ratings %}
+                <option value="{{ rating }}">{{ rating }}</option>
+            {% endfor %}
+          </select>
+        <div class="input-group mb-3">
+            <span class="input-group-text">Description</span>
+            <textarea class="form-control" aria-label="Description" name="content" id="content" rows="6" placeholder="You can expand this text field"></textarea>
+        </div>
+        <button class="btn btn-outline-info" type="submit" id="submit">Submit</button>
+    </form>
+    <script>
+        document.querySelector('#submit').addEventListener('click', function() {
+            let content = document.querySelector('#content');
+            if (content.value === "") {
+                alert("Must provide description");
+                event.preventDefault();
+            }
+        })
+    </script>
+{% endblock %}

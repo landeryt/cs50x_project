@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+    <form action="/register" method="post">
+        <h2 class="mb-4">Register</h2>
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="username" name="username" placeholder="Username" type="text">
+        </div>
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" id="password" name="password" placeholder="Password" type="password">
+        </div>
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" id="confirmation" name="confirmation" placeholder="Confirm password" type="password">
+        </div>
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" id="displayname" name="displayname" placeholder="Display Name" type="text">
+        </div>
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" id="magicword" name="magicword" placeholder="Magic Word" type="text">
+        </div>
+        <div class="mb-3">
+            <select class="form-select mx-auto w-auto" id="timezone" name="timezone">
+                <option disabled selected>Timezone</option>
+                {% for time in tz %}
+                    <option value="{{ time }}">UTC{{ time }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button class="btn btn-outline-info" id="submit" type="submit">Register</button>
+    </form>
+    <script>
+        document.querySelector('#submit').addEventListener('click', function() {
+            let username = document.querySelector('#username');
+            let password = document.querySelector('#password');
+            let confirmation = document.querySelector('#confirmation');
+            let displayname = document.querySelector('#displayname');
+            let magicword = document.querySelector('#magicword');
+            let length = password.value.length;
+            if (username.value === "") {
+                alert("Must provide username");
+                event.preventDefault();
+            } else if (password.value === "") {
+                alert("Must provide password");
+                event.preventDefault();
+            } else if (confirmation.value === "") {
+                alert("Must provide confirm password");
+                event.preventDefault();
+            } else if (password.value != confirmation.value) {
+                alert("Password and confirm password not identical!");
+                event.preventDefault();
+            } else if (displayname.value === "") {
+                alert("Must provide displayname");
+                event.preventDefault();
+            } else if (magicword.value === "") {
+                alert("Must provide magic word");
+                event.preventDefault();
+            } else if (length < 6) {
+                alert("Password must be longer than 6 characters");
+                event.preventDefault();
+            }
+        })
+    </script>
+
+{% endblock %}

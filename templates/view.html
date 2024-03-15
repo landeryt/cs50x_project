@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    View
+{% endblock %}
+
+{% block main %}
+    <h1 class="mb-4 mont">Your notes</h1>
+    <form action="/download" method="post">
+        <button type="submit" class="btn btn-outline-success mb-4">Download CSV file</button>
+    </form>
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Index</th>
+                <th>Rating</th>
+                <th>Content</th>
+                <th>Timestamp</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in rows %}
+                <tr>
+                    <td class="col-1">{{ loop.index }}</td>
+                    <td class="col-1 rating">{{ row['rating'] }}</td>
+                    <td class="col-7">{{ row['content'] }}</td>
+                    <td class="col-3">{{ row['time'] }}</td>
+                    <td class="col-2">
+                        <form action="/view" method="post">
+                            <input type="hidden" value="{{ row['id'] }}" name="noteId">
+                            <button class="btn btn-outline-info edit" type="submit">Edit</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <script>
+        let list = document.getElementsByClassName("rating");
+        for (let i = 0; i < list.length; i++) {
+            var rating = list[i].textContent;
+            if ((rating == "1") || (rating == "2")) {
+                list[i].style.backgroundColor = '#e34432';
+            } else if ((rating == "3") || (rating == "4")) {
+                list[i].style.backgroundColor = '#f09f35';
+            } else if ((rating == "5") || (rating == "6")) {
+                list[i].style.backgroundColor = '#f2ec30';
+            } else if ((rating == "7") || (rating == "8")) {
+                list[i].style.backgroundColor = '#46c41b';
+            } else if ((rating == "9") || (rating == "10")) {
+                list[i].style.backgroundColor = '#34e5eb';
+            }
+        }
+    </script>
+{% endblock %}

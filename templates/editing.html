@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Editing
+{% endblock %}
+
+{% block main %}
+    <form action="/editing" method="post">
+        <legend class="mb-4 mont">Editing for {{ date.strftime('%d-%m-%Y') }}</legend>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Rating</th>
+                    <th>Content</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="col-1" id="rating" name="rating">{{ rating }}</td>
+                    <td class="col-10">{{ content }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <select class="form-select form-select-lg mb-3" name="rating" id="rating" aria-label="New Rating">
+            <option selected disabled>Rate your day</option>
+            {% for point in ratings %}
+                <option value="{{ point }}">{{ point }}</option>
+            {% endfor %}
+          </select>
+        <div class="input-group mb-3">
+            <span class="input-group-text">Description</span>
+            <textarea class="form-control" aria-label="Description" name="content" id="content" rows="6" placeholder="New description"></textarea>
+        </div>
+        <button class="btn btn-outline-info mb-4" type="submit" id="submit">Edit</button>
+    </form>
+    <form action="/remove" method="post">
+        <button class="btn btn-outline-danger" type="submit">Remove</button>
+    </form>
+    <script>
+        let ratingElement = document.querySelector("#rating");
+        var rating = ratingElement.textContent;
+        if ((rating == "1") || (rating == "2")) {
+            ratingElement.style.backgroundColor = '#e34432';
+        } else if ((rating == "3") || (rating == "4")) {
+            ratingElement.style.backgroundColor = '#f09f35';
+        } else if ((rating == "5") || (rating == "6")) {
+            ratingElement.style.backgroundColor = '#f2ec30';
+        } else if ((rating == "7") || (rating == "8")) {
+            ratingElement.style.backgroundColor = '#46c41b';
+        } else if ((rating == "9") || (rating == "10")) {
+            ratingElement.style.backgroundColor = '#34e5eb';
+        }
+    </script>
+{% endblock %}

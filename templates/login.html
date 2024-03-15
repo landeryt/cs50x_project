@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block main %}
+    <form action="/login" method="post">
+        <h2 class="mb-4">Login</h2>
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="username" name="username" placeholder="Username" type="text">
+        </div>
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" name="password" id="password" placeholder="Password" type="password">
+        </div>
+        <button class="btn btn-outline-info" type="submit" id="submit">Login</button>
+    </form>
+    <p class="margin"><a href="forget">Forgot Password?</a></p>
+    <script>
+        document.querySelector('#submit').addEventListener('click', function() {
+            let username = document.querySelector('#username');
+            let password = document.querySelector('#password');
+            if (username.value === "") {
+                alert("Must provide username");
+                event.preventDefault();
+            } else if (password.value === "") {
+                alert("Must provide password");
+                event.preventDefault();
+            }
+        })
+    </script>
+{% endblock %}
